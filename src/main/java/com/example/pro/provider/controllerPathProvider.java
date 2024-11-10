@@ -5,4 +5,7 @@ public class controllerPathProvider {
     protected String getPath(String str) {
         return _path + str;
     }
+    protected String redirect(String str) {
+        return "redirect:" + getPath(str);
+    }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin List</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+  <h1>LIST PAGE</h1>
+  <div class="tableContainer">
+    <table class="table">
+      <thead>
+        <td>계정</td>
+        <td>이름</td>
+        <td>성별</td>
+        <td>부서</td>
+        <td>직무</td>
+        <td>메일</td>
+        <td>연락처</td>
+        <td>승인상태</td>
+        <td></td>
+      </thead>
+      <tbody class="table-bordered">
+        <tr th:each="data : ${admin_ls}">
+          <td th:text="${data.getId()}"></td>
+          <td th:text="${data.getName()}"></td>
+          <td th:text="${data.getGender()}"></td>
+          <td th:text="${data.getPart()}"></td>
+          <td th:text="${data.getType()}"></td>
+          <td th:text="${data.getMail()}"></td>
+          <td th:text="${data.getPhone()}"></td>
+          <td th:text="${data.getAllowed()}"></td>
+          <td>
+            <a th:class="|btn btn-__(${data.getAllowed().equals('Y')} ? 'danger' : 'success')__|"
+               th:utext="'승인' + ((${data.getAllowed().equals('Y')}) ? '취소' : '처리')"
+               th:href="@{ls/allow(type=(__(${data.getAllowed().equals('Y') && !data.getId().equals('admin')} ? 'C' : 'P')__), id=__(${data.getUid()})__)}"></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <a th:href="|/|" >go admin</a><br>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

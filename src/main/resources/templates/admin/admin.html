@@ -6,7 +6,16 @@
 </head>
 <body>
   <h1>ADMIN</h1>
-  <a href="/admin/register">go Register</a><br>
-  <a th:href="|/admin/log${logUrl}|" >go Log[[${logUrl}]]</a>
+  <div th:if="${session.curUser == null}">
+      <a href="/admin/register" th:if="${session.curUser == null}">go Register</a><br>
+  </div>
+  <div th:if="${session.curUser != null && session.curUser.getId().equals('admin')}">
+      <a href="/admin/ls">go List</a><br>
+  </div>
+
+  <div th:if="${session.curUser != null}">
+      <a href="/admin/edit">go Edit [[${session.curUser.getName()}]]'s Profile</a><br>
+  </div>
+  <a th:href="|/admin/log${logUrl}|" >go Log[[${logUrl}]]</a><br>
 </body>
 </html>

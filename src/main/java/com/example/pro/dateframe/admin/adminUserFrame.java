@@ -11,6 +11,7 @@ import java.sql.SQLException;
 @ToString
 public class adminUserFrame {
     private String uid;         //primary key
+    private String allowed;     //관리자 승인 상태
     private String id;          //관리자 ID
     private String pwd;         //관리자 password
     private String pwd_ag;      //관리자 password 재확인
@@ -26,6 +27,7 @@ public class adminUserFrame {
     public adminUserFrame(ResultSet rs) throws SQLException {
         if(rs == null) return;
         uid = rs.getString("uid");
+        allowed = rs.getString("allowed");
         id = rs.getString("id");
         pwd = rs.getString("password");
 //        pwd_ag = rs.getString("password_ag");
